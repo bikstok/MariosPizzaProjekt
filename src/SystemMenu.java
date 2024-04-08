@@ -5,7 +5,7 @@ import java.util.*;
 public class SystemMenu {
     String[] accounting; // for accounting
     String[] menu; //editMenu(Scanner)
-    String[] orders; //Main method hub
+    static String[] orders; //Main method hub
     static Scanner scan = new Scanner(System.in);
 
     public SystemMenu(String[] accounting, String[] menu, String[] orders) {
