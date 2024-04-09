@@ -18,7 +18,7 @@ public class SystemMenu {
 
 
 
-    public void ordersCreation() {
+    public static void ordersCreation() {
 
         String[] updatedOrder = new String[orders.length + 1];
         for (int i = 0; i < orders.length - 1; i++){
@@ -75,8 +75,8 @@ public class SystemMenu {
                     accountingManagement();
                     break;
                 case 4:
-                    program = false;
                     System.out.println("You ended the program");
+                    System.exit(1);
                 default:
                     System.out.println("You choose a wrong number.");
             }
