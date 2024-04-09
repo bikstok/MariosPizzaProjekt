@@ -1,10 +1,13 @@
- public class Pizza {
-    private String name;
+import java.util.Arrays;
+
+public class Pizza {
     private int id;
+    private String name;
     private int price;
     private String[] ingredients;
 
-    public Pizza(String name, int price, String[] ingredients) {
+    public Pizza(int id, String name,  int price, String[] ingredients) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.ingredients = ingredients;
@@ -25,8 +28,9 @@
          return ingredients;
      }
 
-      //public String[] toString() {
-       // return name; " - Kr" + price + "Indgridents" + Arrays.toString(ingredients);
+      public String toString() {
+        return id + ". "+ name + ": " + Arrays.toString(ingredients)+ " - Kr. " + price;
+      }
 }
 
 

@@ -45,8 +45,8 @@ public class OrderingSystem {
         String timeInput = scan.next();
         LocalTime time = LocalTime.parse(timeInput);
 
-        String cratedOrder = "The pizza menu you ordered was " + pizzaID + " and you chose an amount of " + quantity + " at the localtime of " + time;
-        return cratedOrder;
+        System.out.println("You ordered number " + pizzaID + " and you chose an amount of " + quantity + " with a finish time of " + time);
+        return (pizzaID-1) + " " + quantity + " " + time;
     }
 
     public static void makePayment(){
