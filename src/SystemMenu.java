@@ -5,21 +5,21 @@ import java.util.*;
 public class SystemMenu {
     String[] accounting; // for accounting
     static ArrayList<Pizza> menu; //editMenu(Scanner)
-    static ArrayList<String> orders; //Main method hub
+
     static Scanner scan = new Scanner(System.in);
 
-    public SystemMenu(String[] accounting, ArrayList<Pizza> menu, String[] orders) {
+    public SystemMenu(String[] accounting, ArrayList<Pizza> menu) {
 
         this.accounting = new String[accounting.length];
         this.menu = new ArrayList<Pizza>();
-        this.orders = new ArrayList<String>();
+
     }
 
 
     public static void AddPizzasToMenu(){
         File file = new File("./src/Menu.txt");
         menu = new ArrayList<Pizza>();
-        orders = new ArrayList<String>();
+
 
         try {
             Scanner scanner = new Scanner(file);
@@ -27,7 +27,7 @@ public class SystemMenu {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
-                //Del op i navn og pris
+                //Del op i navn:ingredienser og pris
                 String[] parts = line.split(" - ");
 
                 String pizzaInfo = parts[0];
@@ -59,12 +59,39 @@ public class SystemMenu {
 
     public static void ordersCreation() {
 
-        String newSale = OrderingSystem.makeNewSale();
-        String order = OrderingSystem.createOrder();
 
-        orders.add(order);
+
+        boolean orderInProgress = true;
+
+        while (orderInProgress) {
+
+
+            String newSale = OrderingSystem.makeNewSale();
+            String order = OrderingSystem.createOrder();
+
+            String orderAccepted = newSale + order;
+            System.out.printf(orderAccepted);
+            System.out.println();
+
+            System.out.println("Would you like to order a new pizza? If yes then type 1 otherwise type 2 to end your order.");
+            int orderChoice = scan.nextInt();
+
+            if (orderChoice == 2){
+                orderInProgress = false;
+            } else if (orderChoice == 1){
+                System.out.println("Okay time for the next pizza :)");
+            } else {
+                System.out.println("Not an option. Please type a valid number.");
+            }
+        }
     }
 
+    public static void displayOrders() {
+        for (int i = 0; i < OrderingSystem.orderCount; i++) {
+            System.out.println("Order " + (i + 1) + "; " + OrderingSystem.orders[i]);
+
+        }
+    }
 
     public static void menuEditing() {
 
@@ -77,25 +104,26 @@ public class SystemMenu {
 
     public static void main(String[] args) { //system menu
 
-        AddPizzasToMenu();
+         AddPizzasToMenu();
 
         Scanner scan = new Scanner(System.in);
 
         boolean program = true;
 
         while(program){
-            System.out.println("Welcome to Marios pizza ordering system.");
+            System.out.println("Welcome to Marios pizz3a ordering system.");
 
-            // printMenu
+
             System.out.println("Menu:");
             PrintMenu();
             System.out.println("\nPick your choice");
 
 
-            System.out.println("Press 1 if you would like to view the orders.");
-            System.out.println("Press 2 if you would like to edit the menu.");
-            System.out.println("Press 3 if you would like to check accounting.");
-            System.out.println("Press 4 if you would like to quit the program.");
+            System.out.println("Press 1 if you would like to create an order.");
+            System.out.println("Press 2 if you would like to remove an order.");
+            System.out.println("Press 3 if you would like to display current orders.");
+            System.out.println("Press 4 if you would like to check accounting.");
+            System.out.println("Press 5 if you would like to quit the program.");
 
 
             System.out.println("Press the number for the option you would like.");
@@ -106,18 +134,21 @@ public class SystemMenu {
                     ordersCreation();
                     break;
                 case 2:
-                    menuEditing();
+                    OrderingSystem.removeOrder();
                     break;
                 case 3:
-                    accountingManagement();
+                    displayOrders();
                     break;
                 case 4:
+                    accountingManagement();
+                    break;
+                case 5:
                     System.out.println("You ended the program");
                     System.exit(1);
+                    break;
                 default:
                     System.out.println("You choose a wrong number.");
             }
         }
     }
 }
-
