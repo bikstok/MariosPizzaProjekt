@@ -12,14 +12,7 @@ public class OrderingSystem {
     public static String[] orders = new String[max];
     public static int orderCount = 0;
 
-    static {
-        orders[0] = "1 2 10:30";
-        orders[1] = "2 7 11:00";
-        orders[2] = "13 3 12:00";
-        orders[3] = "8 7 13:30";
-        orders[4] = "5 2 14:45";
-        orderCount = 5;
-    }
+
     String name;
     String customerID;
     int pizzaID;
@@ -39,34 +32,39 @@ public class OrderingSystem {
     private static int globalCustomerID = 0;
     public static String makeNewSale(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("What is your name? ");
+        System.out.println("What is the customers name? ");
         String name = scan.next();
         globalCustomerID++;
-        String message = "The customers name is " + name + " and the customer id is #" + globalCustomerID;
+        String message = "The customers name is " + name + " and the customers id is #" + globalCustomerID;
         return message;
     }
-
 
 
 
     public static String createOrder() {
 
             Scanner scan = new Scanner(System.in);
-            System.out.println("What pizza would you like? ");
+            System.out.println("What pizza does the customer want? ");
             int pizzaID = scan.nextInt();
-            System.out.println("Excellent choice, how many would you want? ");
+            System.out.println("How many does the customers want? ");
             int quantity = scan.nextInt();
-            System.out.println("And what time would you like the pizza to be ready? ");
+
+
+            System.out.println("And at what time would the customers like the pizza to be ready? ");
             String timeInput = scan.next();
             LocalTime time = LocalTime.parse(timeInput);
 
-            System.out.println("You ordered number " + pizzaID + " and you chose an amount of " + quantity + " with a finish time of " + time);
+            System.out.println("Customer ordered number " + pizzaID + " and chose an amount of " + quantity + " with a finish time of " + time);
             int customerID = orderCount;
             orders[orderCount++] = "Pizza ID: " + pizzaID + " Amount:" + quantity + " " + " Time: " + time + " CustomerID: #" + orderCount;
             return "Pizza ID: " + pizzaID + " Amount: " + quantity + " " + " Time: " + time + " CustomerID: #" + orderCount;
+
+
            /* globalCustomerID++
         System.out.println("you have order nr:" +globalCustomerID); */
+
     }
+
 
     public static void removeOrder() {
         String[] orderChange = new String[orders.length - 1];
@@ -91,6 +89,20 @@ public class OrderingSystem {
         orders = orderChange;
         orderCount--;
 
+    }
+
+    public static void printFile() {
+        String fileName = "./src/OrderTotal.txt";
+
+        try (Scanner scan = new Scanner(new FileReader(fileName))) {
+            while (scan.hasNextLine()) {
+                System.out.println(scan.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
     }
 
 }

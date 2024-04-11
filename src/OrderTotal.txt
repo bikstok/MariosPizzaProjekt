@@ -1,2 +1,3 @@
-13 3 12:00
-Pizza ID: 2 Amount:1  Time: 13:00 CustomerID: #5
+
+Pizza ID: 1 Amount:1  Time: 13:00 CustomerID: #1
+Pizza ID: 12 Amount:2  Time: 01:00 CustomerID: #1

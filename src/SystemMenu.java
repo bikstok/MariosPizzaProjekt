@@ -113,11 +113,7 @@ public class SystemMenu {
         while(program){
             System.out.println("Welcome to Marios pizz3a ordering system.");
 
-
-            System.out.println("Menu:");
-            PrintMenu();
             System.out.println("\nPick your choice");
-
 
             System.out.println("Press 1 if you would like to create an order.");
             System.out.println("Press 2 if you would like to remove an order.");
@@ -131,6 +127,7 @@ public class SystemMenu {
 
             switch (menu) {
                 case 1:
+                    PrintMenu();
                     ordersCreation();
                     break;
                 case 2:
@@ -140,7 +137,7 @@ public class SystemMenu {
                     displayOrders();
                     break;
                 case 4:
-                    accountingManagement();
+                    OrderingSystem.printFile();
                     break;
                 case 5:
                     System.out.println("You ended the program");
